@@ -6,6 +6,7 @@
 
 ```
 https://your-worker.workers.dev
+demo https://columbina.hyposelenia.dpdns.org/
 ```
 
 每次刷新页面都会随机播放一个 Bilibili 视频。
@@ -85,7 +86,7 @@ Create namespace
 例如：
 
 ```
-BILI_VIDEOS
+VIDEOS
 ```
 
 
@@ -107,8 +108,11 @@ Value:
 
 ```json
 [
-  "BVxxxxxxxx",
-  "BVyyyyyyyy"
+  "BV1LprnBWE7H",
+  "BV1a1G86TE5s",
+  "BV1nGzQBCEvG",
+  "BV1z9AnzmETK",
+  "BV1V3N16wEWq"
 ]
 ```
 
@@ -250,11 +254,15 @@ bili-random-worker
 
 │
 
-├── wrangler.toml.example
+├── wrangler.toml
 
 │
 
 ├── .gitignore
+
+│
+
+├── License
 
 │
 
