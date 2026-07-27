@@ -330,7 +330,7 @@ id = "651504338ec64b7ebb4008d34220afc3"
 - Bilibili 用户协议
 - 视频作者授权规则
 - 当地法律法规
-- Cherry别打我（meme,jk）
+- Cherry别打我（
 
 
 ---
