@@ -5,7 +5,7 @@
 打开固定链接：
 
 ```
-https://columbina.hyposelenia.dpdns.org/
+bili-random-worker.how2pl4y.workers.dev
 ```
 
 每次刷新页面都会随机播放一个 Bilibili 视频。
