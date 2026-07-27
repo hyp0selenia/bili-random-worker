@@ -250,7 +250,7 @@ bili-random-worker
 
 │
 
-├── wrangler.toml.example
+├── wrangler.toml
 
 │
 
