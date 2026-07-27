@@ -1,0 +1,12 @@
+{
+  "name": "bili-random-worker",
+  "version": "1.0.0",
+  "description": "Random Bilibili video player powered by Cloudflare Workers and KV",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "latest"
+  }
+}
