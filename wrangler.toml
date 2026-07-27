@@ -5,16 +5,13 @@ main = "src/index.js"
 compatibility_date = "2026-07-27"
 
 
-# KV 请在 Cloudflare Dashboard 手动绑定
-
-# Workers
-# ↓
-# Settings
-# ↓
-# Bindings
-# ↓
-# KV Namespace
-
-
-# Binding name:
+# KV Namespace binding is configured manually:
+#
+# Cloudflare Dashboard
+# → Workers & Pages
+# → Your Worker
+# → Settings
+# → Bindings
+#
+# Variable name:
 # VIDEOS
