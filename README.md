@@ -274,6 +274,23 @@ bili-random-worker
 
 # Notes
 
+## KV命名空间错误问题
+
+
+正式部署前可以将wrangler.toml中的
+```
+[[kv_namespaces]]
+
+binding = "VIDEOS"
+
+id = "651504338ec64b7ebb4008d34220afc3"
+```
+部分注释或者直接删掉，因为每个账号的"id"不同
+
+既然这么麻烦，为什么没有在上传代码前直接删掉它？
+抱歉。因为我每次修改仓库内容后都要再重新绑定KV命名空间，太麻烦了，我真是个懒🐖：（
+如果因此为您带来不便，再次向您道歉。
+
 
 ## Auto fullscreen
 
@@ -306,6 +323,7 @@ bili-random-worker
 - Bilibili 用户协议
 - 视频作者授权规则
 - 当地法律法规
+- Cherry别打我（meme,jk）
 
 
 ---
