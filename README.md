@@ -5,8 +5,7 @@
 打开固定链接：
 
 ```
-https://your-worker.workers.dev
-demo https://columbina.hyposelenia.dpdns.org/
+https://columbina.hyposelenia.dpdns.org/
 ```
 
 每次刷新页面都会随机播放一个 Bilibili 视频。
