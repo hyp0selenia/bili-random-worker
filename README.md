@@ -13,17 +13,13 @@ bili-random-worker.how2pl4y.workers.dev
 
 ## Features
 
-✨ Cloudflare Workers 驱动
+✨ 使用 Cloudflare Workers 部署，无需额外服务器
 
-✨ Cloudflare KV 保存 BV 号
+✨ 使用 Cloudflare KV 保存 BV 号，视频列表不写入源码
 
-✨ BV 列表不写入源码
+✨ 每次刷新随机切换视频
 
-✨ 刷新随机切换视频
-
-✨ 支持 GitHub 开源部署
-
-✨ 无需服务器
+✨ 管理后台 `/admin` 密码鉴权、自动去重（支持bvid和链接）。
 
 
 ---
@@ -31,33 +27,9 @@ bili-random-worker.how2pl4y.workers.dev
 # Architecture
 
 ```
-Browser
+Browser → Cloudflare Worker → Cloudflare KV → Random BV number → Bilibili Player
 
-   |
-
-   v
-
-Cloudflare Worker
-
-   |
-
-   v
-
-Cloudflare KV
-
-   |
-
-   v
-
-Random BV number
-
-   |
-
-   v
-
-Bilibili Player
 ```
-
 
 ---
 
@@ -70,15 +42,7 @@ Bilibili Player
 进入 Cloudflare:
 
 ```
-Workers & Pages
-
-↓
-
-KV
-
-↓
-
-Create namespace
+Workers & Pages → KV → Create namespace
 ```
 
 
@@ -107,11 +71,9 @@ Value:
 
 ```json
 [
-  "BV1LprnBWE7H",
-  "BV1a1G86TE5s",
-  "BV1nGzQBCEvG",
-  "BV1z9AnzmETK",
-  "BV1V3N16wEWq"
+  "BVxxxxxxxxxx",
+  "BVyyyyyyyyyy",
+  "BVzzzzzzzzzz",
 ]
 ```
 
@@ -124,27 +86,7 @@ Value:
 进入：
 
 ```
-Workers
-
-↓
-
-你的 Worker
-
-↓
-
-Settings
-
-↓
-
-Bindings
-
-↓
-
-Add binding
-
-↓
-
-KV Namespace
+Workers → 你的 Worker → Settings → Bindings → Add binding → KV Namespace
 ```
 
 
@@ -158,10 +100,51 @@ VIDEOS
 ```
 
 
-选择你的 KV。
+选择你刚才创建的 KV。
 
 
 ---
+
+## 4. 设置管理后台密码（重要）
+
+
+进入：
+
+```
+Workers → 你的 Worker → Settings → Variables and Secrets → Add → Secret
+```
+
+
+填写：
+
+
+Variable name:
+
+```
+ADMIN_PASSWORD
+```
+
+Value:
+
+```
+你自己设定的密码
+```
+
+
+---
+
+## 管理后台 /admin & API
+
+```bash
+# 获取列表
+curl -u :你的密码 https://你的域名/admin/api/videos
+
+# 更新列表
+curl -u :你的密码 -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"videos":["BV1xx411c7mD","BV1yy411c7mE"]}' \
+  https://你的域名/admin/api/videos
+```
 
 # Local Development
 
@@ -181,6 +164,19 @@ npm install
 npx wrangler login
 ```
 
+本地测试密码（任选一种方式）：
+方式一：Secret
+
+```
+npx wrangler secret put ADMIN_PASSWORD
+```
+
+方式二：.dev.vars 文件
+在项目根目录创建 .dev.vars：
+
+```
+ADMIN_PASSWORD=你的测试密码
+```
 
 运行：
 
@@ -204,35 +200,7 @@ npm run deploy
 
 
 推荐使用 Cloudflare Git integration。
-
-
-流程：
-
-
-```
-GitHub Repository
-
-        |
-
-        v
-
-Cloudflare Workers
-
-        |
-
-        v
-
-Automatic Deployment
-```
-
-
-每次 push：
-
-```
-git push
-```
-
-Cloudflare 自动重新部署。
+每次 git push 后 Cloudflare 会自动重新部署。
 
 
 ---
@@ -241,30 +209,14 @@ Cloudflare 自动重新部署。
 
 
 ```
+
 bili-random-worker
-
 ├── src
-
 │   └── index.js
-
-│
-
 ├── package.json
-
-│
-
 ├── wrangler.toml
-
-│
-
 ├── .gitignore
-
-│
-
 ├── License
-
-│
-
 └── README.md
 
 ```
@@ -277,7 +229,7 @@ bili-random-worker
 ## KV命名空间错误问题
 
 
-正式部署前可以将wrangler.toml中的
+正式部署前可以将wrangler.toml中以下内容注释掉或删掉，因为每个账号的 id 不同。
 ```
 [[kv_namespaces]]
 
@@ -285,26 +237,13 @@ binding = "VIDEOS"
 
 id = "651504338ec64b7ebb4008d34220afc3"
 ```
-部分注释或者直接删掉，因为每个账号的"id"不同
-
-
-
-既然这么麻烦，为什么没有在上传代码前直接删掉它？
-
-抱歉。因为我每次修改仓库内容后都要再重新绑定KV命名空间，太麻烦了，我真是个懒🐖：（
-
-如果因此为您带来不便，再次向您道歉。
-
 
 ---
 
 
 ## Auto fullscreen
 
-由于浏览器安全限制：
-
-网页无法保证无需用户操作直接进入真正全屏。
-
+由于浏览器安全限制，网页无法保证无需用户操作直接进入真正全屏。
 
 本项目采用：
 
@@ -330,7 +269,7 @@ id = "651504338ec64b7ebb4008d34220afc3"
 - Bilibili 用户协议
 - 视频作者授权规则
 - 当地法律法规
-- Cherry别打我（
+- Cherry你🐎什么时候④啊
 
 
 ---
