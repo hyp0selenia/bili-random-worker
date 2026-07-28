@@ -165,16 +165,14 @@ npx wrangler login
 ```
 
 本地测试密码（任选一种方式）：
-方式一：Secret
 
 ```
+方式一：Secret
 npx wrangler secret put ADMIN_PASSWORD
 ```
 
-方式二：.dev.vars 文件
-在项目根目录创建 .dev.vars：
-
 ```
+方式二：在项目根目录创建 .dev.vars：
 ADMIN_PASSWORD=你的测试密码
 ```
 
@@ -199,8 +197,7 @@ npm run deploy
 # GitHub Deployment
 
 
-推荐使用 Cloudflare Git integration。
-每次 git push 后 Cloudflare 会自动重新部署。
+推荐使用 Cloudflare Git integration,每次 git push 后 Cloudflare 会自动重新部署。
 
 
 ---
@@ -229,7 +226,7 @@ bili-random-worker
 ## KV命名空间错误问题
 
 
-正式部署前可以将wrangler.toml中以下内容注释掉或删掉，因为每个账号的 id 不同。
+正式部署前可以将wrangler.toml中的以下内容删掉，因为每个账号的 id 不同。
 ```
 [[kv_namespaces]]
 
@@ -269,8 +266,9 @@ id = "651504338ec64b7ebb4008d34220afc3"
 - Bilibili 用户协议
 - 视频作者授权规则
 - 当地法律法规
+~~~
 - Cherry你🐎什么时候④啊
-
+~~~
 
 ---
 
@@ -281,4 +279,6 @@ MIT License
 
 ---
 
-Powered by DeepSeek v4
+Powered by 🐋 DeepSeek v4
+
+---
