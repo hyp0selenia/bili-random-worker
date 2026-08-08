@@ -5,7 +5,7 @@
 打开固定链接：
 
 ```
-bili-random-worker.how2pl4y.workers.dev
+bili-random-worker.yourname.workers.dev
 ```
 
 每次刷新页面都会随机播放一个 Bilibili 视频。
